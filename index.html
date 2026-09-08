@@ -17,7 +17,7 @@
     <header class="navbar">
         <div class="container nav-container">
             <img src="img/logo.png" alt="Punto Repulgue Logo" class="logo">
-            <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20Punto%20Repulgue." target="_blank" class="btn-primary nav-btn">
+            <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20Punto%20Repulgue." target="_blank" id="nav-whatsapp-btn" class="btn-primary nav-btn">
                 <i class="fa-brands fa-whatsapp"></i> Pedir Ahora
             </a>
         </div>
@@ -31,7 +31,7 @@
                 <h1>¡Conocé el auténtico sabor de San Juan!</h1>
                 <p>Empanadas artesanales, frescas y llenas de sabor. Elaboradas con ingredientes seleccionados y la mejor cocción.</p>
                 <div class="hero-buttons">
-                    <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20consultar%20el%20menú%20y%20precios." target="_blank" class="btn-primary btn-lg">
+                    <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20consultar%20el%20menú%20y%20precios." target="_blank" id="hero-whatsapp-btn" class="btn-primary btn-lg">
                         <i class="fa-brands fa-whatsapp"></i> Hacer Pedido por WhatsApp
                     </a>
                 </div>
@@ -42,50 +42,70 @@
         </div>
     </section>
 
-    <!-- Sección de Variedades / Menú -->
+    <!-- Sección de Menú / Variedades -->
     <section class="menu-section" id="menu">
         <div class="container">
             <h2 class="section-title">Nuestros Sabores</h2>
-            <p class="section-subtitle">Elegí tus gustos favoritos y hacenos tu pedido por WhatsApp</p>
+            <p class="section-subtitle">Elegí tus gustos favoritos y armá tu pedido fácilmente</p>
 
             <div class="menu-grid">
                 <!-- Sabor 1 -->
-                <div class="card">
+                <div class="card" data-nombre="Carne Tradicional">
                     <img src="img/carne-comun.png" alt="Empanada Carne Tradicional" class="card-img">
                     <div class="card-body">
                         <h3>Carne Tradicional</h3>
                         <p>Carne cortada a cuchillo, cebolla, huevo duro y especias seleccionadas.</p>
                         <span class="tag">Clásica Sanjuanina</span>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus" aria-label="Restar">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus" aria-label="Sumar">+</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Sabor 2 -->
-                <div class="card">
+                <div class="card" data-nombre="Carne Picante">
                     <img src="img/carne-picante.png" alt="Empanada Carne Picante" class="card-img">
                     <div class="card-body">
                         <h3>Carne Picante</h3>
                         <p>El toque justo de ají y especias para los amantes del buen sabor picante.</p>
                         <span class="tag">Especial</span>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus" aria-label="Restar">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus" aria-label="Sumar">+</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Sabor 3 -->
-                <div class="card">
+                <div class="card" data-nombre="Jamón y Queso">
                     <img src="img/jamon-queso.png" alt="Empanada Jamón y Queso" class="card-img">
                     <div class="card-body">
                         <h3>Jamón y Queso</h3>
                         <p>Abundante queso muzzarella derretido con jamón cocido de primera calidad.</p>
                         <span class="tag">Para todos</span>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus" aria-label="Restar">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus" aria-label="Sumar">+</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Sabor 4 -->
-                <div class="card">
+                <div class="card" data-nombre="Humita / Choclo">
                     <img src="img/humita.png" alt="Empanada de Humita / Choclo" class="card-img">
                     <div class="card-body">
                         <h3>Humita / Choclo</h3>
                         <p>Choclo cremoso, queso y un toque suave de salsa blanca artesanal.</p>
                         <span class="tag">Vegetariana</span>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus" aria-label="Restar">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus" aria-label="Sumar">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,7 +119,7 @@
             <div class="promo-text">
                 <h2>¡Pedí tu docena y compartí el mejor momento!</h2>
                 <p>Armá tu caja con los gustos que más te gusten. Te las llevamos listas y bien calientes a la puerta de tu casa.</p>
-                <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20pedir%20una%20docena%20de%20empanadas." target="_blank" class="btn-secondary">
+                <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20pedir%20una%20docena%20de%20empanadas." target="_blank" id="promo-whatsapp-btn" class="btn-secondary">
                     <i class="fa-brands fa-whatsapp"></i> Pedir la Promo Docena
                 </a>
             </div>
@@ -115,10 +135,23 @@
         </div>
     </footer>
 
-    <!-- Botón Flotante de WhatsApp -->
-    <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20empanadas." class="whatsapp-float" target="_blank" title="Pedir por WhatsApp">
+    <!-- Barra Flotante de Resumen Dinámico -->
+    <div id="order-bar" class="order-bar hidden">
+        <div class="order-info">
+            <span id="order-summary-text">0 empanadas seleccionadas</span>
+            <small id="order-promo-tag" class="promo-badge"></small>
+        </div>
+        <a href="#" id="send-order-btn" target="_blank" class="btn-primary">
+            <i class="fa-brands fa-whatsapp"></i> Enviar Pedido
+        </a>
+    </div>
+
+    <!-- Botón Flotante Estándar de WhatsApp -->
+    <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20empanadas." class="whatsapp-float" id="main-whatsapp-float" target="_blank" title="Pedir por WhatsApp">
         <i class="fa-brands fa-whatsapp my-float"></i>
     </a>
 
+    <!-- Archivo JS externo -->
+    <script src="script.js"></script>
 </body>
 </html>
