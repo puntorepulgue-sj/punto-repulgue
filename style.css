@@ -216,23 +216,28 @@ body {
     flex-grow: 1;
 }
 
-/* Controles de Cantidad Móviles Touch-Friendly */
+/* Controles de Cantidad Móviles Touch-Friendly (Corregido) */
 .quantity-controls {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--white);
-    border: 2px solid #e0e0e0;
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
     border-radius: 30px;
     padding: 6px 12px;
+    width: 100%; /* Forzar a ocupar todo el ancho del card-body */
+    margin-top: auto; /* Empuja el control al fondo de la tarjeta */
+    box-sizing: border-box;
 }
 
 .btn-qty {
     background-color: var(--primary-color);
-    color: var(--white);
+    color: #ffffff;
     border: none;
-    width: 44px; /* Tamaño táctil estándar mínimo (44px) */
+    width: 44px; /* Tamaño táctil mínimo recomendado (44px x 44px) */
     height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
     font-size: 1.4rem;
     font-weight: 700;
@@ -242,6 +247,11 @@ body {
     justify-content: center;
     transition: background-color 0.2s ease, transform 0.1s ease;
     user-select: none;
+    line-height: 1;
+}
+
+.btn-qty:hover {
+    background-color: #143728;
 }
 
 .btn-qty:active {
@@ -250,10 +260,11 @@ body {
 
 .qty-count {
     font-weight: 800;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: var(--text-color);
-    min-width: 30px;
+    min-width: 36px;
     text-align: center;
+    display: inline-block;
 }
 
 /* Sección Promo */
