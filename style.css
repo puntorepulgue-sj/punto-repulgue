@@ -20,7 +20,7 @@ body {
     background-color: var(--bg-light);
     color: var(--text-color);
     line-height: 1.5;
-    padding-bottom: 90px; /* Margen amplio para evitar que la barra flotante tape el contenido */
+    padding-bottom: 90px;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -86,6 +86,10 @@ body {
 .btn-lg {
     padding: 16px 28px;
     font-size: 1.05rem;
+}
+
+.btn-block {
+    width: 100%;
 }
 
 /* Hero Section */
@@ -216,7 +220,7 @@ body {
     flex-grow: 1;
 }
 
-/* Controles de Cantidad Móviles Touch-Friendly (Corregido) */
+/* Controles de Cantidad Móviles Touch-Friendly (100% Ancho) */
 .quantity-controls {
     display: flex;
     align-items: center;
@@ -225,8 +229,8 @@ body {
     border: 2px solid #e2e8f0;
     border-radius: 30px;
     padding: 6px 12px;
-    width: 100%; /* Forzar a ocupar todo el ancho del card-body */
-    margin-top: auto; /* Empuja el control al fondo de la tarjeta */
+    width: 100%;
+    margin-top: auto;
     box-sizing: border-box;
 }
 
@@ -234,7 +238,7 @@ body {
     background-color: var(--primary-color);
     color: #ffffff;
     border: none;
-    width: 44px; /* Tamaño táctil mínimo recomendado (44px x 44px) */
+    width: 44px;
     height: 44px;
     min-width: 44px;
     min-height: 44px;
@@ -321,7 +325,7 @@ footer {
     color: #888;
 }
 
-/* Barra Flotante de Resumen Móvil/Desktop */
+/* Barra Flotante de Resumen */
 .order-bar {
     position: fixed;
     bottom: 0;
@@ -364,6 +368,92 @@ footer {
     padding: 10px 18px;
 }
 
+/* Modal de Checkout / Datos de Cliente */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+    transition: opacity 0.25s ease;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #888;
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 4px;
+    font-size: 1.3rem;
+}
+
+.modal-sub {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(29, 77, 56, 0.15);
+}
+
 /* Botón Flotante Estándar de WhatsApp */
 .whatsapp-float {
     position: fixed;
@@ -389,14 +479,14 @@ footer {
     transform: scale(1.08);
 }
 
-/* Estilos Adaptativos Responsive (Celulares y Tablets) */
+/* Estilos Adaptativos Responsive (Móviles) */
 @media (max-width: 768px) {
     .logo {
         height: 50px;
     }
 
     .nav-btn span {
-        display: none; /* En celular ahorra espacio dejando solo el icono WhatsApp */
+        display: none;
     }
 
     .nav-btn {
@@ -422,12 +512,8 @@ footer {
         font-size: 0.98rem;
     }
 
-    .btn-block {
-        width: 100%;
-    }
-
     .hero-image {
-        order: -1; /* En celulares la foto principal se muestra arriba del título */
+        order: -1;
     }
 
     .hero-image img {
@@ -436,7 +522,7 @@ footer {
     }
 
     .menu-grid {
-        grid-template-columns: 1fr; /* 1 sola columna amplia en pantallas táctiles */
+        grid-template-columns: 1fr;
         gap: 16px;
     }
 
