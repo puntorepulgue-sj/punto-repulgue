@@ -1,7 +1,7 @@
-const pedido = {};
+let pedido = {};
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Manejo de botones + y -
+    // Manejo de botones + y - en las tarjetas de empanadas
     document.querySelectorAll('.card').forEach(card => {
         const sabor = card.dataset.nombre;
         const countSpan = card.querySelector('.qty-count');
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Procesar Formulario y Generar Mensaje para WhatsApp
+    // Procesar Formulario de Entrega y WhatsApp
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
@@ -56,9 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalEmpanadas = Object.values(pedido).reduce((a, b) => a + b, 0);
             let aplicaPromo = totalEmpanadas >= 12;
 
-            // Formato de Mensaje Estructurado
+            // Formateo estructurado del mensaje para el Bot de WhatsApp
             let mensaje = `*NUEVO PEDIDO - PUNTO REPULGUE*\n\n`;
-            
             mensaje += `👤 *Cliente:* ${nombre}\n`;
             mensaje += `📍 *Dirección:* ${direccion}\n`;
             mensaje += `💳 *Pago:* ${pago}\n`;
@@ -80,13 +79,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const urlWA = `https://wa.me/5492644172479?text=${encodeURIComponent(mensaje)}`;
             
-            // Cerrar modal y abrir WhatsApp
+            // 1. Ocultar modal de datos de entrega
             modal.classList.add('hidden');
+
+            // 2. Reiniciar el pedido en la web (limpiar variables y contadores)
+            resetearPedido();
+
+            // 3. Mostrar modal de confirmación en pantalla
+            const confirmModal = document.getElementById('success-modal');
+            if (confirmModal) {
+                confirmModal.classList.remove('hidden');
+            }
+
+            // 4. Abrir WhatsApp en pestaña nueva
             window.open(urlWA, '_blank');
+        });
+    }
+
+    // Evento para cerrar el modal de confirmación
+    const closeSuccessBtn = document.getElementById('close-success-modal');
+    if (closeSuccessBtn) {
+        closeSuccessBtn.addEventListener('click', () => {
+            document.getElementById('success-modal').classList.add('hidden');
         });
     }
 });
 
+// Función para actualizar la barra flotante
 function actualizarBarra() {
     const totalEmpanadas = Object.values(pedido).reduce((a, b) => a + b, 0);
     const orderBar = document.getElementById('order-bar');
@@ -106,4 +125,14 @@ function actualizarBarra() {
         orderBar.classList.add('hidden');
         if (floatWaBtn) floatWaBtn.style.bottom = '25px';
     }
+}
+
+// Función para dejar todo en cero tras enviar el pedido
+function resetearPedido() {
+    pedido = {};
+    document.querySelectorAll('.qty-count').forEach(span => {
+        span.textContent = '0';
+    });
+    document.getElementById('checkout-form').reset();
+    actualizarBarra();
 }

@@ -566,4 +566,14 @@ footer {
         padding: 10px 14px;
         font-size: 0.85rem;
     }
+    /* Estilos para el aviso de confirmación exitosa */
+    .text-center {
+        text-align: center;
+    }
+
+    .success-icon {
+        font-size: 3.5rem;
+        color: var(--whatsapp-color);
+        margin-bottom: 12px;
+    }
 }
