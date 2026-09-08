@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Variables de Colores inspirados en la marca */
 :root {
     --primary-color: #1d4d38;    /* Verde oscuro */
@@ -282,6 +283,8 @@ footer {
         font-size: 1.8rem;
     }
 =======
+=======
+>>>>>>> 25f9480a5239938c0e3776748c8049ed71e48a56
 /* Variables de Colores inspirados en la marca */
 :root {
     --primary-color: #1d4d38;    /* Verde oscuro */
@@ -564,5 +567,8 @@ footer {
     .hero-text h1 {
         font-size: 1.8rem;
     }
+<<<<<<< HEAD
 >>>>>>> 25f9480 (Actualización del sitio)
+=======
+>>>>>>> 25f9480a5239938c0e3776748c8049ed71e48a56
 }
