@@ -1,30 +1,37 @@
 let pedido = {};
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Manejo de botones + y - en las tarjetas de empanadas
+    // 1. Manejo de botones + y - en las tarjetas
     document.querySelectorAll('.card').forEach(card => {
         const sabor = card.dataset.nombre;
         const countSpan = card.querySelector('.qty-count');
 
-        card.querySelector('.plus').addEventListener('click', (e) => {
-            e.preventDefault();
-            pedido[sabor] = (pedido[sabor] || 0) + 1;
-            countSpan.textContent = pedido[sabor];
-            actualizarBarra();
-        });
+        const plusBtn = card.querySelector('.plus');
+        const minusBtn = card.querySelector('.minus');
 
-        card.querySelector('.minus').addEventListener('click', (e) => {
-            e.preventDefault();
-            if (pedido[sabor] && pedido[sabor] > 0) {
-                pedido[sabor]--;
-                if (pedido[sabor] === 0) delete pedido[sabor];
-                countSpan.textContent = pedido[sabor] || 0;
+        if (plusBtn) {
+            plusBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                pedido[sabor] = (pedido[sabor] || 0) + 1;
+                countSpan.textContent = pedido[sabor];
                 actualizarBarra();
-            }
-        });
+            });
+        }
+
+        if (minusBtn) {
+            minusBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (pedido[sabor] && pedido[sabor] > 0) {
+                    pedido[sabor]--;
+                    if (pedido[sabor] === 0) delete pedido[sabor];
+                    countSpan.textContent = pedido[sabor] || 0;
+                    actualizarBarra();
+                }
+            });
+        }
     });
 
-    // Abrir Modal de Checkout
+    // 2. Abrir Modal de Checkout
     const sendOrderBtn = document.getElementById('send-order-btn');
     const modal = document.getElementById('checkout-modal');
     const closeModal = document.getElementById('close-modal');
@@ -42,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Procesar Formulario de Entrega y WhatsApp
+    // 3. Procesar Formulario de Entrega y Enviar a WhatsApp
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
@@ -56,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalEmpanadas = Object.values(pedido).reduce((a, b) => a + b, 0);
             let aplicaPromo = totalEmpanadas >= 12;
 
-            // Formateo estructurado del mensaje para el Bot de WhatsApp
+            // Construir Mensaje para WhatsApp
             let mensaje = `*NUEVO PEDIDO - PUNTO REPULGUE*\n\n`;
             mensaje += `👤 *Cliente:* ${nombre}\n`;
             mensaje += `📍 *Dirección:* ${direccion}\n`;
@@ -68,7 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mensaje += `\n-------------------------\n`;
             mensaje += `📋 *DETALLE DEL PEDIDO:*\n`;
             for (const [sabor, cantidad] of Object.entries(pedido)) {
-                mensaje += `• ${cantidad}x ${sabor}\n`;
+                if (cantidad > 0) {
+                    mensaje += `• ${cantidad}x${sabor}\n`;
+                }
             }
             
             mensaje += `-------------------------\n`;
@@ -78,34 +87,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const urlWA = `https://wa.me/5492644172479?text=${encodeURIComponent(mensaje)}`;
-            
-            // 1. Ocultar modal de datos de entrega
-            modal.classList.add('hidden');
 
-            // 2. Reiniciar el pedido en la web (limpiar variables y contadores)
+            // PASO A: Resetear la página e interfaz a 0 inmediatamente
             resetearPedido();
 
-            // 3. Mostrar modal de confirmación en pantalla
+            // PASO B: Ocultar modal de formulario
+            modal.classList.add('hidden');
+
+            // PASO C: Mostrar modal de éxito
             const confirmModal = document.getElementById('success-modal');
             if (confirmModal) {
                 confirmModal.classList.remove('hidden');
             }
 
-            // 4. Abrir WhatsApp en pestaña nueva
-            window.open(urlWA, '_blank');
+            // PASO D: Redirigir/Abrir WhatsApp con un leve retraso para asegurar renderizado de interfaz
+            setTimeout(() => {
+                window.open(urlWA, '_blank');
+            }, 100);
         });
     }
 
-    // Evento para cerrar el modal de confirmación
+    // 4. Cerrar el modal de confirmación
     const closeSuccessBtn = document.getElementById('close-success-modal');
     if (closeSuccessBtn) {
-        closeSuccessBtn.addEventListener('click', () => {
+        closeSuccessBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             document.getElementById('success-modal').classList.add('hidden');
         });
     }
 });
 
-// Función para actualizar la barra flotante
+// Función global para actualizar la barra inferior flotante
 function actualizarBarra() {
     const totalEmpanadas = Object.values(pedido).reduce((a, b) => a + b, 0);
     const orderBar = document.getElementById('order-bar');
@@ -114,25 +126,37 @@ function actualizarBarra() {
     const floatWaBtn = document.getElementById('main-whatsapp-float');
 
     if (totalEmpanadas > 0) {
-        orderBar.classList.remove('hidden');
-        summaryText.textContent = `${totalEmpanadas} empanada${totalEmpanadas > 1 ? 's' : ''} seleccionada${totalEmpanadas > 1 ? 's' : ''}`;
+        if (orderBar) orderBar.classList.remove('hidden');
+        if (summaryText) {
+            summaryText.textContent = `${totalEmpanadas} empanada${totalEmpanadas > 1 ? 's' : ''} seleccionada${totalEmpanadas > 1 ? 's' : ''}`;
+        }
 
         if (floatWaBtn) floatWaBtn.style.bottom = '85px';
 
         let aplicaPromo = totalEmpanadas >= 12;
-        promoTag.textContent = aplicaPromo ? '¡Aplica Promo Docena!' : '';
+        if (promoTag) {
+            promoTag.textContent = aplicaPromo ? '¡Aplica Promo Docena!' : '';
+        }
     } else {
-        orderBar.classList.add('hidden');
+        if (orderBar) orderBar.classList.add('hidden');
         if (floatWaBtn) floatWaBtn.style.bottom = '25px';
     }
 }
 
-// Función para dejar todo en cero tras enviar el pedido
+// Función encargada de limpiar estado y contadores
 function resetearPedido() {
+    // Vaciar objeto de pedido
     pedido = {};
+
+    // Poner contadores de las tarjetas visualmente en 0
     document.querySelectorAll('.qty-count').forEach(span => {
         span.textContent = '0';
     });
-    document.getElementById('checkout-form').reset();
+
+    // Limpiar campos del formulario
+    const form = document.getElementById('checkout-form');
+    if (form) form.reset();
+
+    // Ocultar barra flotante
     actualizarBarra();
 }
