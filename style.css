@@ -52,30 +52,41 @@ body {
 .btn-primary {
     background-color: var(--whatsapp-color);
     color: var(--white);
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 12px 24px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: background 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
     background-color: #1eb857;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45);
 }
 
 .btn-secondary {
-    background-color: var(--accent-color);
+    background-color: var(--whatsapp-color);
     color: var(--white);
     padding: 12px 24px;
-    border-radius: 25px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #1eb857;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45);
 }
 
 .btn-lg {
