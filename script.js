@@ -1,162 +1,157 @@
-let pedido = {};
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Manejo de botones + y - en las tarjetas
-    document.querySelectorAll('.card').forEach(card => {
-        const sabor = card.dataset.nombre;
-        const countSpan = card.querySelector('.qty-count');
+    // Referencias a elementos del DOM
+    const cards = document.querySelectorAll('.card');
+    const orderBar = document.getElementById('order-bar');
+    const orderSummaryText = document.getElementById('order-summary-text');
+    const orderPromoTag = document.getElementById('order-promo-tag');
+    const sendOrderBtn = document.getElementById('send-order-btn');
+    const whatsappFloat = document.getElementById('main-whatsapp-float');
 
-        const plusBtn = card.querySelector('.plus');
-        const minusBtn = card.querySelector('.minus');
+    // Modales
+    const checkoutModal = document.getElementById('checkout-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    const checkoutForm = document.getElementById('checkout-form');
+    
+    const successModal = document.getElementById('success-modal');
+    const closeSuccessModalBtn = document.getElementById('close-success-modal');
 
-        if (plusBtn) {
-            plusBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                pedido[sabor] = (pedido[sabor] || 0) + 1;
-                countSpan.textContent = pedido[sabor];
-                actualizarBarra();
-            });
-        }
+    // Objeto para llevar el estado del carrito: { "Carne Tradicional": 3, "Humita": 2 }
+    const cart = {};
 
-        if (minusBtn) {
-            minusBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (pedido[sabor] && pedido[sabor] > 0) {
-                    pedido[sabor]--;
-                    if (pedido[sabor] === 0) delete pedido[sabor];
-                    countSpan.textContent = pedido[sabor] || 0;
-                    actualizarBarra();
+    // Número de teléfono de destino (formato internacional sin +)
+    const WHATSAPP_PHONE = "5492644172479";
+
+    // Manejo de clicks en botones + y - de los productos
+    cards.forEach(card => {
+        const nombre = card.getAttribute('data-nombre');
+        const btnMinus = card.querySelector('.minus');
+        const btnPlus = card.querySelector('.plus');
+        const qtyCount = card.querySelector('.qty-count');
+
+        btnPlus.addEventListener('click', () => {
+            const currentQty = (cart[nombre] || 0) + 1;
+            cart[nombre] = currentQty;
+            qtyCount.textContent = currentQty;
+            updateOrderBar();
+        });
+
+        btnMinus.addEventListener('click', () => {
+            if (cart[nombre] && cart[nombre] > 0) {
+                cart[nombre] -= 1;
+                if (cart[nombre] === 0) {
+                    delete cart[nombre];
                 }
-            });
-        }
+                qtyCount.textContent = cart[nombre] || 0;
+                updateOrderBar();
+            }
+        });
     });
 
-    // 2. Abrir Modal de Checkout
-    const sendOrderBtn = document.getElementById('send-order-btn');
-    const modal = document.getElementById('checkout-modal');
-    const closeModal = document.getElementById('close-modal');
+    // Actualizar resumen y visibilidad de la barra flotante
+    function updateOrderBar() {
+        const totalEmpanadas = Object.values(cart).reduce((a, b) => a + b, 0);
 
-    if (sendOrderBtn) {
-        sendOrderBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.remove('hidden');
-        });
-    }
-
-    if (closeModal) {
-        closeModal.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
-    }
-
-    // 3. Procesar Formulario de Entrega y Enviar a WhatsApp
-    const checkoutForm = document.getElementById('checkout-form');
-    if (checkoutForm) {
-        checkoutForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const nombre = document.getElementById('cliente-nombre').value.trim();
-            const direccion = document.getElementById('cliente-direccion').value.trim();
-            const pago = document.getElementById('cliente-pago').value;
-            const notas = document.getElementById('cliente-notas').value.trim();
-
-            const totalEmpanadas = Object.values(pedido).reduce((a, b) => a + b, 0);
-            let aplicaPromo = totalEmpanadas >= 12;
-
-            // Construir Mensaje para WhatsApp
-            let mensaje = `*NUEVO PEDIDO - PUNTO REPULGUE*\n\n`;
-            mensaje += `👤 *Cliente:* ${nombre}\n`;
-            mensaje += `📍 *Dirección:* ${direccion}\n`;
-            mensaje += `💳 *Pago:* ${pago}\n`;
-            if (notas) {
-                mensaje += `📝 *Notas:* ${notas}\n`;
-            }
+        if (totalEmpanadas > 0) {
+            orderBar.classList.remove('hidden');
             
-            mensaje += `\n-------------------------\n`;
-            mensaje += `📋 *DETALLE DEL PEDIDO:*\n`;
-            for (const [sabor, cantidad] of Object.entries(pedido)) {
-                if (cantidad > 0) {
-                    mensaje += `• ${cantidad}x${sabor}\n`;
+            // Subir el botón flotante de WhatsApp para que no se superponga con la barra
+            if (whatsappFloat) {
+                whatsappFloat.style.bottom = "85px";
+            }
+
+            // Texto de cantidad
+            const textoEmpanadas = totalEmpanadas === 1 ? '1 empanada seleccionada' : `${totalEmpanadas} empanadas seleccionadas`;
+            orderSummaryText.textContent = textoEmpanadas;
+
+            // Indicador visual de docenas / promociones
+            const docenas = Math.floor(totalEmpanadas / 12);
+            const sobrantes = totalEmpanadas % 12;
+
+            if (docenas > 0) {
+                if (sobrantes === 0) {
+                    orderPromoTag.textContent = `🎉 ¡Completaste ${docenas} ${docenas === 1 ? 'docena' : 'docenas'}!`;
+                } else {
+                    const faltantes = 12 - sobrantes;
+                    orderPromoTag.textContent = `💡 Llevás ${docenas} ${docenas === 1 ? 'docena' : 'docenas'}. ¡Sumá ${faltantes} más para otra docena!`;
                 }
+            } else {
+                const faltantes = 12 - totalEmpanadas;
+                orderPromoTag.textContent = `💡 ¡Sumá ${faltantes} más para completar tu 1ª docena!`;
             }
-            
-            mensaje += `-------------------------\n`;
-            mensaje += `📦 *Total Unidades:* ${totalEmpanadas}\n`;
-            if (aplicaPromo) {
-                mensaje += `🎉 *Promoción:* ¡Aplica Promo Docena!\n`;
+        } else {
+            orderBar.classList.add('hidden');
+            if (whatsappFloat) {
+                whatsappFloat.style.bottom = "25px";
             }
-
-            const urlWA = `https://wa.me/5492644172479?text=${encodeURIComponent(mensaje)}`;
-
-            // PASO A: Resetear la página e interfaz a 0 inmediatamente
-            resetearPedido();
-
-            // PASO B: Ocultar modal de formulario
-            modal.classList.add('hidden');
-
-            // PASO C: Mostrar modal de éxito
-            const confirmModal = document.getElementById('success-modal');
-            if (confirmModal) {
-                confirmModal.classList.remove('hidden');
-            }
-
-            // PASO D: Redirigir/Abrir WhatsApp con un leve retraso para asegurar renderizado de interfaz
-            setTimeout(() => {
-                window.open(urlWA, '_blank');
-            }, 100);
-        });
+        }
     }
 
-    // 4. Cerrar el modal de confirmación
-    const closeSuccessBtn = document.getElementById('close-success-modal');
-    if (closeSuccessBtn) {
-        closeSuccessBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('success-modal').classList.add('hidden');
-        });
+    // Abrir Modal de Datos de Entrega
+    sendOrderBtn.addEventListener('click', () => {
+        checkoutModal.classList.remove('hidden');
+    });
+
+    // Cerrar Modal Checkout
+    closeModalBtn.addEventListener('click', () => {
+        checkoutModal.classList.add('hidden');
+    });
+
+    // Formulario de Checkout: Generar mensaje e iniciar flujo por WhatsApp
+    checkoutForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nombre = document.getElementById('cliente-nombre').value.trim();
+        const direccion = document.getElementById('cliente-direccion').value.trim();
+        const pago = document.getElementById('cliente-pago').value;
+        const notas = document.getElementById('cliente-notas').value.trim();
+
+        // Construcción del mensaje para el Bot de WhatsApp
+        let mensaje = `*¡Hola Punto Repulgue! Quiero realizar un pedido:* 🥟\n\n`;
+        mensaje += `*Detalle de Empanadas:*\n`;
+
+        for (const [sabor, cantidad] of Object.entries(cart)) {
+            mensaje += `• ${cantidad}x ${sabor}\n`;
+        }
+
+        const totalUnidades = Object.values(cart).reduce((a, b) => a + b, 0);
+        mensaje += `\n*Total de unidades:* ${totalUnidades}\n`;
+
+        mensaje += `\n*Datos para la entrega:*\n`;
+        mensaje += `👤 *Nombre:* ${nombre}\n`;
+        mensaje += `📍 *Dirección:* ${direccion}\n`;
+        mensaje += `💳 *Forma de pago:* ${pago}\n`;
+
+        if (notas) {
+            mensaje += `📝 *Notas:* ${notas}\n`;
+        }
+
+        // Codificar mensaje para la URL
+        const encodedMessage = encodeURIComponent(mensaje);
+        const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
+
+        // Abrir WhatsApp en pestaña nueva
+        window.open(whatsappUrl, '_blank');
+
+        // Cerrar modal checkout y abrir modal de éxito
+        checkoutModal.classList.add('hidden');
+        successModal.classList.remove('hidden');
+
+        // Resetear carrito y formulario
+        resetCart();
+    });
+
+    // Cerrar Modal de Éxito
+    closeSuccessModalBtn.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+    });
+
+    // Resetear todo el estado
+    function resetCart() {
+        for (const key in cart) {
+            delete cart[key];
+        }
+        document.querySelectorAll('.qty-count').forEach(el => el.textContent = '0');
+        checkoutForm.reset();
+        updateOrderBar();
     }
 });
-
-// Función global para actualizar la barra inferior flotante
-function actualizarBarra() {
-    const totalEmpanadas = Object.values(pedido).reduce((a, b) => a + b, 0);
-    const orderBar = document.getElementById('order-bar');
-    const summaryText = document.getElementById('order-summary-text');
-    const promoTag = document.getElementById('order-promo-tag');
-    const floatWaBtn = document.getElementById('main-whatsapp-float');
-
-    if (totalEmpanadas > 0) {
-        if (orderBar) orderBar.classList.remove('hidden');
-        if (summaryText) {
-            summaryText.textContent = `${totalEmpanadas} empanada${totalEmpanadas > 1 ? 's' : ''} seleccionada${totalEmpanadas > 1 ? 's' : ''}`;
-        }
-
-        if (floatWaBtn) floatWaBtn.style.bottom = '85px';
-
-        let aplicaPromo = totalEmpanadas >= 12;
-        if (promoTag) {
-            promoTag.textContent = aplicaPromo ? '¡Aplica Promo Docena!' : '';
-        }
-    } else {
-        if (orderBar) orderBar.classList.add('hidden');
-        if (floatWaBtn) floatWaBtn.style.bottom = '25px';
-    }
-}
-
-// Función encargada de limpiar estado y contadores
-function resetearPedido() {
-    // Vaciar objeto de pedido
-    pedido = {};
-
-    // Poner contadores de las tarjetas visualmente en 0
-    document.querySelectorAll('.qty-count').forEach(span => {
-        span.textContent = '0';
-    });
-
-    // Limpiar campos del formulario
-    const form = document.getElementById('checkout-form');
-    if (form) form.reset();
-
-    // Ocultar barra flotante
-    actualizarBarra();
-}
