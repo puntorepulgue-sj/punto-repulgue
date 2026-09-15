@@ -25,7 +25,7 @@
                     <span class="brand-tagline"> | Empanadas & Sándwiches</span>
                 </div>
             </a>
-            <a href="#menu" class="btn-primary">Ver Menú</a>
+            <a href="#empanadas" class="btn-primary">Ver Menú</a>
         </div>
     </header>
 
@@ -35,8 +35,8 @@
             <div class="hero-text">
                 <span class="badge">🛵 Delivery Disponible en San Juan</span>
                 <h1>¡El sabor auténtico de San Juan en tu mesa!</h1>
-                <p>Empanadas y sándwiches artesanales preparados con pan casero e ingredientes seleccionados.</p>
-                <a href="#menu" class="btn-primary btn-lg">Pedir Ahora</a>
+                <p>Empanadas artesanales y sándwiches en pan casero con jamón de elaboración propia.</p>
+                <a href="#empanadas" class="btn-primary btn-lg">Pedir Ahora</a>
             </div>
             <div class="hero-image">
                 <img src="img/empanadas-caja.jpg" alt="Empanadas y Sándwiches Punto Repulgue">
@@ -44,23 +44,42 @@
         </div>
     </section>
 
-    <!-- Sección Menú Principales -->
-    <section class="menu-section" id="menu">
+    <!-- Sección 1: Empanadas Individuales -->
+    <section class="menu-section" id="empanadas">
         <div class="container">
-            <h2 class="section-title">Nuestra Carta</h2>
-            <p class="section-subtitle">Selecciona tus variedades e indica las cantidades</p>
+            <h2 class="section-title">🥟 Empanadas Por Unidad</h2>
+            <p class="section-subtitle">Elaboradas con ingredientes de primera y receta tradicional</p>
 
             <div class="menu-grid">
-                <!-- Carne Tradicional -->
-                <div class="card" data-nombre="Empanada de Carne Tradicional" data-precio="1200">
-                    <img src="img/carne-comun.png" alt="Empanada de Carne" class="card-img">
+                <!-- Carne Criolla -->
+                <div class="card" data-nombre="Empanada de Carne Criolla (Picada Especial)" data-precio="1300">
+                    <img src="img/carne-comun.png" alt="Empanada de Carne Criolla" class="card-img">
                     <div class="card-body">
-                        <span class="tag">Empanada</span>
-                        <h3>Carne Tradicional</h3>
-                        <p>Carne cortada, cebolla, condimentos criollos y el toque justo de horneado.</p>
+                        <span class="tag">Tradicional</span>
+                        <h3>Carne Criolla</h3>
+                        <p>Carne picada especial, cebolla rehogada, comino y condimentos típicos sanjuaninos.</p>
                         <div class="price-tag">
                             <span class="price-label">Precio:</span>
-                            <span class="item-price">$1.200</span>
+                            <span class="item-price">$1.300</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carne Cortada a Cuchillo -->
+                <div class="card" data-nombre="Empanada de Carne Cortada a Cuchillo (Premium)" data-precio="1500">
+                    <img src="img/carne-cuchillo.jpg" alt="Empanada Cortada a Cuchillo" class="card-img">
+                    <div class="card-body">
+                        <span class="tag tag-premium">Premium</span>
+                        <h3>Carne Cortada a Cuchillo</h3>
+                        <p>Tierna carne vacuna seleccionada cortada a mano, jugosa y con el clásico toque criollo.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio:</span>
+                            <span class="item-price">$1.500</span>
                         </div>
                         <div class="quantity-controls">
                             <button class="btn-qty minus">-</button>
@@ -71,53 +90,15 @@
                 </div>
 
                 <!-- Jamón y Queso -->
-                <div class="card" data-nombre="Empanada de Jamón y Queso" data-precio="1200">
+                <div class="card" data-nombre="Empanada de Jamón y Queso Artesanal" data-precio="1400">
                     <img src="img/jamon-queso.png" alt="Empanada Jamón y Queso" class="card-img">
                     <div class="card-body">
-                        <span class="tag">Empanada</span>
+                        <span class="tag">Artesanal</span>
                         <h3>Jamón y Queso</h3>
-                        <p>Abundante queso mozzarella derretido y jamón cocido seleccionado.</p>
+                        <p>Queso mozzarella derretido y nuestro exclusivo jamón artesanal elaborado en casa.</p>
                         <div class="price-tag">
                             <span class="price-label">Precio:</span>
-                            <span class="item-price">$1.200</span>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="btn-qty minus">-</button>
-                            <span class="qty-count">0</span>
-                            <button class="btn-qty plus">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sándwich Clásico -->
-                <div class="card" data-nombre="Sándwich Clásico (J/Q, Lechuga, Tomate)" data-precio="3500">
-                    <img src="img/sandwich-clasico.jpg" alt="Sándwich de Jamón y Queso en Pan Casero" class="card-img">
-                    <div class="card-body">
-                        <span class="tag tag-sandwich">Sándwich</span>
-                        <h3>Sándwich Clásico</h3>
-                        <p>Pan casero, jamón cocido, queso, tomate fresco y lechuga crujiente.</p>
-                        <div class="price-tag">
-                            <span class="price-label">Precio:</span>
-                            <span class="item-price">$3.500</span>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="btn-qty minus">-</button>
-                            <span class="qty-count">0</span>
-                            <button class="btn-qty plus">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sándwich Especial con Huevo -->
-                <div class="card" data-nombre="Sándwich Especial (J/Q, Lechuga, Tomate, Huevo)" data-precio="4000">
-                    <img src="img/sandwich-huevo.jpg" alt="Sándwich Especial con Huevo en Pan Casero" class="card-img">
-                    <div class="card-body">
-                        <span class="tag tag-sandwich">Sándwich</span>
-                        <h3>Sándwich Especial</h3>
-                        <p>Pan casero, jamón, queso, tomate, lechuga y huevo al punto ideal.</p>
-                        <div class="price-tag">
-                            <span class="price-label">Precio:</span>
-                            <span class="item-price">$4.000</span>
+                            <span class="item-price">$1.400</span>
                         </div>
                         <div class="quantity-controls">
                             <button class="btn-qty minus">-</button>
@@ -130,22 +111,134 @@
         </div>
     </section>
 
-    <!-- Sección Promociones -->
+    <!-- Sección 2: Docenas y Combos de Empanadas -->
+    <section class="menu-section docenas-section" id="docenas">
+        <div class="container">
+            <h2 class="section-title">📦 Docenas y Promos de Empanadas</h2>
+            <p class="section-subtitle">Ahorrá pidiendo por docenas para compartir</p>
+
+            <div class="menu-grid">
+                <!-- Docena a Elección -->
+                <div class="card promo-card" data-nombre="Docena de Empanadas (Variedades a elección)" data-precio="15000">
+                    <div class="card-body">
+                        <span class="tag tag-promo">Ideal Grupos</span>
+                        <h3>Docena de Empanadas</h3>
+                        <p><strong>12 Empanadas a elección</strong> (Criollas, Cortadas a Cuchillo o Jamón y Queso).</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio Docena:</span>
+                            <span class="item-price">$15.000</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Docena + Gaseosa -->
+                <div class="card promo-card" data-nombre="Promo Docena + Gaseosa 1.5L" data-precio="17200">
+                    <div class="card-body">
+                        <span class="tag tag-promo">Combo Imperdible</span>
+                        <h3>Docena + Gaseosa 1.5L</h3>
+                        <p><strong>12 Empanadas a elección</strong> + <strong>1 Gaseosa de 1.5L</strong> a elección.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio Promo:</span>
+                            <span class="item-price">$17.200</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 3: Sándwiches Artesanales -->
+    <section class="menu-section" id="sandwiches">
+        <div class="container">
+            <h2 class="section-title">🥪 Sándwiches en Pan Casero</h2>
+            <p class="section-subtitle">Con nuestro jamón casero especial y vegetales frescos</p>
+
+            <div class="menu-grid">
+                <!-- Sándwich Clásico -->
+                <div class="card" data-nombre="Sándwich Clásico (Jamón Casero, Queso, Lechuga, Tomate)" data-precio="3200">
+                    <img src="img/sandwich-clasico.jpg" alt="Sándwich Clásico" class="card-img">
+                    <div class="card-body">
+                        <span class="tag tag-sandwich">Sándwich</span>
+                        <h3>Sándwich Clásico</h3>
+                        <p>Pan casero recien horneado, jamón artesanal de la casa, queso, tomate y lechuga.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio:</span>
+                            <span class="item-price">$3.200</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sándwich Especial -->
+                <div class="card" data-nombre="Sándwich Especial (Jamón Casero, Queso, Lechuga, Tomate, Huevo)" data-precio="3800">
+                    <img src="img/sandwich-huevo.jpg" alt="Sándwich Especial" class="card-img">
+                    <div class="card-body">
+                        <span class="tag tag-sandwich">Sándwich</span>
+                        <h3>Sándwich Especial</h3>
+                        <p>Pan casero, jamón artesanal, queso, tomate, lechuga y huevo cocido al punto justo.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio:</span>
+                            <span class="item-price">$3.800</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 4: Promociones Mixtas -->
     <section class="menu-section promo-menu-section" id="promos">
         <div class="container">
-            <h2 class="section-title">🔥 Promociones Especiales</h2>
-            <p class="section-subtitle">Combos pensados para disfrutar más</p>
+            <h2 class="section-title">🔥 Combos Mixtos con Bebida</h2>
+            <p class="section-subtitle">La combinación perfecta de empanadas, sándwich y gaseosa</p>
 
             <div class="menu-grid">
                 <!-- Promo 1 -->
-                <div class="card promo-card" data-nombre="Promo 1 (2 Empanadas + 1 Sándwich)" data-precio="5500">
+                <div class="card promo-card" data-nombre="Promo 1 (2 Empanadas + 1 Sándwich)" data-precio="5400">
                     <div class="card-body">
                         <span class="tag tag-promo">Combo Individual</span>
                         <h3>Promo 1</h3>
-                        <p><strong>2 Empanadas</strong> + <strong>1 Sándwich</strong> (en Pan Casero).</p>
+                        <p><strong>2 Empanadas</strong> + <strong>1 Sándwich Clásico</strong> (Pan Casero).</p>
                         <div class="price-tag">
                             <span class="price-label">Precio Combo:</span>
-                            <span class="item-price">$5.500</span>
+                            <span class="item-price">$5.400</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 1 + Gaseosa -->
+                <div class="card promo-card" data-nombre="Promo 1 Full Gaseosa (2 Empanadas + 1 Sándwich + Gaseosa)" data-precio="7500">
+                    <div class="card-body">
+                        <span class="tag tag-promo">Combo con Bebida</span>
+                        <h3>Promo 1 + Gaseosa</h3>
+                        <p><strong>Promo 1</strong> (2 Empanadas + 1 Sándwich) + <strong>1 Gaseosa 1.5L</strong> a elección.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio Combo:</span>
+                            <span class="item-price">$7.500</span>
                         </div>
                         <div class="quantity-controls">
                             <button class="btn-qty minus">-</button>
@@ -156,14 +249,14 @@
                 </div>
 
                 <!-- Promo 2 -->
-                <div class="card promo-card" data-nombre="Promo 2 (4 Empanadas + 2 Sándwiches)" data-precio="10500">
+                <div class="card promo-card" data-nombre="Promo 2 (4 Empanadas + 2 Sándwiches)" data-precio="10200">
                     <div class="card-body">
                         <span class="tag tag-promo">Combo Dúo</span>
                         <h3>Promo 2</h3>
-                        <p><strong>4 Empanadas</strong> + <strong>2 Sándwiches</strong> (Pan Casero).</p>
+                        <p><strong>4 Empanadas</strong> + <strong>2 Sándwiches Clásicos</strong> (Pan Casero).</p>
                         <div class="price-tag">
                             <span class="price-label">Precio Combo:</span>
-                            <span class="item-price">$10.500</span>
+                            <span class="item-price">$10.200</span>
                         </div>
                         <div class="quantity-controls">
                             <button class="btn-qty minus">-</button>
@@ -173,33 +266,15 @@
                     </div>
                 </div>
 
-                <!-- Promo Full Gaseosa 1 -->
-                <div class="card promo-card" data-nombre="Promo 1 Full Gaseosa (2 Empanadas + 1 Sándwich + Gaseosa)" data-precio="7000">
-                    <div class="card-body">
-                        <span class="tag tag-promo">Combo con Bebida</span>
-                        <h3>Promo 1 + Gaseosa chica 500 ml</h3>
-                        <p><strong>Promo 1</strong> (2 Empanadas + 1 Sándwich) + <strong>1 Gaseosa</strong> a elección.</p>
-                        <div class="price-tag">
-                            <span class="price-label">Precio Combo:</span>
-                            <span class="item-price">$7.000</span>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="btn-qty minus">-</button>
-                            <span class="qty-count">0</span>
-                            <button class="btn-qty plus">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Promo Full Gaseosa 2 -->
-                <div class="card promo-card" data-nombre="Promo 2 Full Gaseosa (4 Empanadas + 2 Sándwiches + Gaseosa)" data-precio="12000">
+                <!-- Promo 2 + Gaseosa -->
+                <div class="card promo-card" data-nombre="Promo 2 Full Gaseosa (4 Empanadas + 2 Sándwiches + Gaseosa)" data-precio="12400">
                     <div class="card-body">
                         <span class="tag tag-promo">Combo Dúo con Bebida</span>
-                        <h3>Promo 2 + Gaseosa chica 500 ml</h3>
-                        <p><strong>Promo 2</strong> (4 Empanadas + 2 Sándwiches) + <strong>1 Gaseosa</strong> a elección.</p>
+                        <h3>Promo 2 + Gaseosa</h3>
+                        <p><strong>Promo 2</strong> (4 Empanadas + 2 Sándwiches) + <strong>1 Gaseosa 1.5L</strong> a elección.</p>
                         <div class="price-tag">
                             <span class="price-label">Precio Combo:</span>
-                            <span class="item-price">$12.000</span>
+                            <span class="item-price">$12.400</span>
                         </div>
                         <div class="quantity-controls">
                             <button class="btn-qty minus">-</button>
@@ -220,7 +295,7 @@
         </div>
     </footer>
 
-    <!-- Barra Flotante de Resumen con Total acumulado -->
+    <!-- Barra Flotante de Resumen -->
     <div class="order-bar hidden" id="order-bar">
         <div class="order-info">
             <span id="order-summary-text">0 ítems seleccionados</span>
@@ -242,9 +317,24 @@
                     <input type="text" id="cliente-nombre" placeholder="Ej: Juan Pérez" required>
                 </div>
 
+                <!-- Método de Entrega (Retiro vs Delivery Gran San Juan) -->
                 <div class="form-group">
+                    <label>Tipo de Entrega *</label>
+                    <div class="opciones-entrega-radio">
+                        <label class="radio-option">
+                            <input type="radio" name="tipo-entrega" value="retiro" id="entrega-retiro" checked>
+                            <span>Retiro en local ($0)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="tipo-entrega" value="delivery" id="entrega-delivery">
+                            <span>Delivery Gran San Juan (+$1.500)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="direccion-container" style="display: none;">
                     <label for="cliente-direccion">Dirección / Barrio *</label>
-                    <input type="text" id="cliente-direccion" placeholder="Ej: Av. Ignacio de la Roza 450" required>
+                    <input type="text" id="cliente-direccion" placeholder="Ej: Av. Ignacio de la Roza 450">
                 </div>
 
                 <div class="form-group">
@@ -258,16 +348,32 @@
                 <div class="form-group" id="gaseosa-option-group" style="display: none;">
                     <label for="cliente-gaseosa">Elección de Gaseosa (Promos con Bebida) *</label>
                     <select id="cliente-gaseosa">
-                        <option value="Coca-Cola Original">Coca-Cola Original</option>
-                        <option value="Coca-Cola Sin Azúcar">Coca-Cola Sin Azúcar</option>
-                        <option value="Sprite">Sprite</option>
-                        <option value="Paso de los Toros Pomelo">Paso de los Toros Pomelo</option>
+                        <option value="Coca-Cola Original 1.5L">Coca-Cola Original 1.5L</option>
+                        <option value="Coca-Cola Sin Azúcar 1.5L">Coca-Cola Sin Azúcar 1.5L</option>
+                        <option value="Sprite 1.5L">Sprite 1.5L</option>
+                        <option value="Paso de los Toros Pomelo 1.5L">Paso de los Toros Pomelo 1.5L</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="cliente-notas">Aclaraciones o Notas (Opcional)</label>
-                    <textarea id="cliente-notas" rows="3" placeholder="Ej: Sabores elegidos en los combos, con/sin mayonesa, etc."></textarea>
+                    <label for="cliente-notas">Aclaraciones o Sabores de Empanadas (Opcional)</label>
+                    <textarea id="cliente-notas" rows="3" placeholder="Ej: Para la docena/combos quiero 6 cortadas a cuchillo y 6 jamón y queso."></textarea>
+                </div>
+
+                <!-- Desglose de Totales -->
+                <div class="checkout-totales-resumen">
+                    <div class="linea-monto">
+                        <span>Subtotal productos:</span>
+                        <span id="modal-subtotal">$0</span>
+                    </div>
+                    <div class="linea-monto">
+                        <span>Costo de envío:</span>
+                        <span id="modal-envio">$0</span>
+                    </div>
+                    <div class="linea-monto total-final-monto">
+                        <span>Total Final:</span>
+                        <span id="modal-total-final">$0</span>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn-primary btn-block">Enviar Pedido por WhatsApp 🚀</button>
