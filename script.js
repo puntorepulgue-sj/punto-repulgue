@@ -94,18 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Función para reiniciar todo a 0
     function vaciarCarrito() {
-        // Resetear objeto carrito
         carrito = {};
-
-        // Resetear contadores visuales en las tarjetas
         document.querySelectorAll('.qty-count').forEach(el => {
             el.textContent = '0';
         });
-
-        // Ocultar barra flotante de resumen
         actualizarEstadoCarrito();
-
-        // Limpiar el formulario de checkout
         checkoutForm.reset();
         radioRetiro.checked = true;
         actualizarOpcionesEnvio();
@@ -203,15 +196,25 @@ document.addEventListener('DOMContentLoaded', () => {
         mensaje += `Envío: $${costoEnvio.toLocaleString('es-AR')}\n`;
         mensaje += `*TOTAL FINAL: $${totalFinal.toLocaleString('es-AR')}*\n`;
 
-        // Cerrar modal de checkout y mostrar modal de confirmación
-        checkoutModal.classList.add('hidden');
-        successModal.classList.remove('hidden');
+        const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
 
-        // Redirigir a WhatsApp y vaciar los datos del pedido
-        setTimeout(() => {
-            const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
+        // Ocultar modal checkout
+        checkoutModal.classList.add('hidden');
+
+        // Detectar si es dispositivo móvil para elegir el método de redirección adecuado
+        const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (esMovil) {
+            // En celular vaciamos y redirigimos inmediatamente (evita bloqueo de emergentes)
             vaciarCarrito();
-        }, 1200);
+            window.location.href = url;
+        } else {
+            // En PC mostramos el modal de éxito y abrimos en una nueva pestaña
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+                window.open(url, '_blank');
+                vaciarCarrito();
+            }, 800);
+        }
     });
 });
