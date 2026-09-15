@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punto Repulgue | Empanadas Artesanales San Juan</title>
-    <!-- Asegúrate de que el archivo CSS en tu carpeta se llame styles.css -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Iconos y Fuentes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Punto Repulgue | Empanadas y Sándwiches Artesanales</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -19,11 +20,12 @@
         <div class="container nav-container">
             <a href="#" class="brand-logo-container">
                 <img src="img/logo.png" alt="Punto Repulgue Logo" class="logo">
-                <span class="brand-title">Punto Repulgue</span>
+                <div>
+                    <span class="brand-title">Punto Repulgue</span>
+                    <span class="brand-tagline"> | Empanadas & Sándwiches</span>
+                </div>
             </a>
-            <div class="brand-tagline">
-                <span>Fábrica de Pastas & Empanadas</span>
-            </div>
+            <a href="#menu" class="btn-primary">Ver Menú</a>
         </div>
     </header>
 
@@ -31,84 +33,96 @@
     <section class="hero">
         <div class="container hero-content">
             <div class="hero-text">
-                <span class="badge"><i class="fa-solid fa-motorcycle"></i> Delivery Disponible en San Juan</span>
-                <h1>¡Conocé el auténtico sabor de San Juan!</h1>
-                <p>Empanadas artesanales, frescas y llenas de sabor. Elaboradas con ingredientes seleccionados y la mejor cocción.</p>
-                <div class="hero-buttons">
-                    <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20consultar%20el%20menú%20y%20precios." target="_blank" class="btn-primary btn-lg btn-block">
-                        <i class="fa-brands fa-whatsapp"></i> Hacer Pedido por WhatsApp
-                    </a>
-                </div>
+                <span class="badge">🛵 Delivery Disponible en San Juan</span>
+                <h1>¡El sabor auténtico de San Juan en tu mesa!</h1>
+                <p>Empanadas y sándwiches artesanales preparados con pan casero e ingredientes seleccionados.</p>
+                <a href="#menu" class="btn-primary btn-lg">Pedir Ahora</a>
             </div>
             <div class="hero-image">
-                <img src="img/empanadas-caja.jpg" alt="Caja de Empanadas Punto Repulgue">
+                <img src="img/empanadas-caja.jpg" alt="Empanadas y Sándwiches Punto Repulgue">
             </div>
         </div>
     </section>
 
-    <!-- Menú / Variedades -->
+    <!-- Sección Menú Principales -->
     <section class="menu-section" id="menu">
         <div class="container">
-            <h2 class="section-title">Nuestros Sabores</h2>
-            <p class="section-subtitle">Elegí tus gustos favoritos y armá tu pedido fácilmente</p>
+            <h2 class="section-title">Nuestra Carta</h2>
+            <p class="section-subtitle">Selecciona tus variedades e indica las cantidades</p>
 
             <div class="menu-grid">
-                <!-- Sabor 1 -->
-                <div class="card" data-nombre="Carne Tradicional">
-                    <img src="img/carne-comun.png" alt="Empanada Carne Tradicional" class="card-img">
+                <!-- Carne Tradicional -->
+                <div class="card" data-nombre="Empanada de Carne Tradicional" data-precio="1200">
+                    <img src="img/carne-comun.png" alt="Empanada de Carne" class="card-img">
                     <div class="card-body">
-                        <span class="tag">Clásica Sanjuanina</span>
+                        <span class="tag">Empanada</span>
                         <h3>Carne Tradicional</h3>
-                        <p>Carne cortada a cuchillo, cebolla, huevo duro y especias seleccionadas.</p>
+                        <p>Carne cortada, cebolla, condimentos criollos y el toque justo de horneado.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio:</span>
+                            <span class="item-price">$1.200</span>
+                        </div>
                         <div class="quantity-controls">
-                            <button class="btn-qty minus" aria-label="Restar">-</button>
+                            <button class="btn-qty minus">-</button>
                             <span class="qty-count">0</span>
-                            <button class="btn-qty plus" aria-label="Sumar">+</button>
+                            <button class="btn-qty plus">+</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sabor 2 -->
-                <div class="card" data-nombre="Carne Picante">
-                    <img src="img/carne-picante.png" alt="Empanada Carne Picante" class="card-img">
-                    <div class="card-body">
-                        <span class="tag">Especial</span>
-                        <h3>Carne Picante</h3>
-                        <p>El toque justo de ají y especias para los amantes del buen sabor picante.</p>
-                        <div class="quantity-controls">
-                            <button class="btn-qty minus" aria-label="Restar">-</button>
-                            <span class="qty-count">0</span>
-                            <button class="btn-qty plus" aria-label="Sumar">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sabor 3 -->
-                <div class="card" data-nombre="Jamón y Queso">
+                <!-- Jamón y Queso -->
+                <div class="card" data-nombre="Empanada de Jamón y Queso" data-precio="1200">
                     <img src="img/jamon-queso.png" alt="Empanada Jamón y Queso" class="card-img">
                     <div class="card-body">
-                        <span class="tag">Para todos</span>
+                        <span class="tag">Empanada</span>
                         <h3>Jamón y Queso</h3>
-                        <p>Abundante queso muzzarella derretido con jamón cocido de primera calidad.</p>
+                        <p>Abundante queso mozzarella derretido y jamón cocido seleccionado.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio:</span>
+                            <span class="item-price">$1.200</span>
+                        </div>
                         <div class="quantity-controls">
-                            <button class="btn-qty minus" aria-label="Restar">-</button>
+                            <button class="btn-qty minus">-</button>
                             <span class="qty-count">0</span>
-                            <button class="btn-qty plus" aria-label="Sumar">+</button>
+                            <button class="btn-qty plus">+</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sabor 4 -->
-                <div class="card" data-nombre="Humita / Choclo">
-                    <img src="img/humita.png" alt="Empanada de Humita / Choclo" class="card-img">
+                <!-- Sándwich Clásico -->
+                <div class="card" data-nombre="Sándwich Clásico (J/Q, Lechuga, Tomate)" data-precio="3500">
+                    <img src="img/sandwich-clasico.jpg" alt="Sándwich de Jamón y Queso en Pan Casero" class="card-img">
                     <div class="card-body">
-                        <span class="tag">Vegetariana</span>
-                        <h3>Humita / Choclo</h3>
-                        <p>Choclo cremoso, queso y un toque suave de salsa blanca artesanal.</p>
+                        <span class="tag tag-sandwich">Sándwich</span>
+                        <h3>Sándwich Clásico</h3>
+                        <p>Pan casero, jamón cocido, queso, tomate fresco y lechuga crujiente.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio:</span>
+                            <span class="item-price">$3.500</span>
+                        </div>
                         <div class="quantity-controls">
-                            <button class="btn-qty minus" aria-label="Restar">-</button>
+                            <button class="btn-qty minus">-</button>
                             <span class="qty-count">0</span>
-                            <button class="btn-qty plus" aria-label="Sumar">+</button>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sándwich Especial con Huevo -->
+                <div class="card" data-nombre="Sándwich Especial (J/Q, Lechuga, Tomate, Huevo)" data-precio="4000">
+                    <img src="img/sandwich-huevo.jpg" alt="Sándwich Especial con Huevo en Pan Casero" class="card-img">
+                    <div class="card-body">
+                        <span class="tag tag-sandwich">Sándwich</span>
+                        <h3>Sándwich Especial</h3>
+                        <p>Pan casero, jamón, queso, tomate, lechuga y huevo al punto ideal.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio:</span>
+                            <span class="item-price">$4.000</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
                         </div>
                     </div>
                 </div>
@@ -116,17 +130,83 @@
         </div>
     </section>
 
-    <!-- Sección Promo -->
-    <section class="promo-section">
+    <!-- Sección Promociones -->
+    <section class="menu-section promo-menu-section" id="promos">
         <div class="container">
-            <div class="promo-container">
-                <img src="img/promo.png" alt="Promo Empanadas" class="promo-img">
-                <div class="promo-text">
-                    <h2>¡Pedí tu docena y compartí el mejor momento!</h2>
-                    <p>Armá tu caja con los gustos que más te gusten. Te las llevamos listas y bien calientes a la puerta de tu casa.</p>
-                    <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20pedir%20una%20docena%20de%20empanadas." target="_blank" class="btn-secondary btn-lg btn-block">
-                        <i class="fa-brands fa-whatsapp"></i> Pedir la Promo Docena
-                    </a>
+            <h2 class="section-title">🔥 Promociones Especiales</h2>
+            <p class="section-subtitle">Combos pensados para disfrutar más</p>
+
+            <div class="menu-grid">
+                <!-- Promo 1 -->
+                <div class="card promo-card" data-nombre="Promo 1 (2 Empanadas + 1 Sándwich)" data-precio="5500">
+                    <div class="card-body">
+                        <span class="tag tag-promo">Combo Individual</span>
+                        <h3>Promo 1</h3>
+                        <p><strong>2 Empanadas</strong> + <strong>1 Sándwich</strong> (en Pan Casero).</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio Combo:</span>
+                            <span class="item-price">$5.500</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 2 -->
+                <div class="card promo-card" data-nombre="Promo 2 (4 Empanadas + 2 Sándwiches)" data-precio="10500">
+                    <div class="card-body">
+                        <span class="tag tag-promo">Combo Dúo</span>
+                        <h3>Promo 2</h3>
+                        <p><strong>4 Empanadas</strong> + <strong>2 Sándwiches</strong> (Pan Casero).</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio Combo:</span>
+                            <span class="item-price">$10.500</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo Full Gaseosa 1 -->
+                <div class="card promo-card" data-nombre="Promo 1 Full Gaseosa (2 Empanadas + 1 Sándwich + Gaseosa)" data-precio="7000">
+                    <div class="card-body">
+                        <span class="tag tag-promo">Combo con Bebida</span>
+                        <h3>Promo 1 + Gaseosa chica 500 ml</h3>
+                        <p><strong>Promo 1</strong> (2 Empanadas + 1 Sándwich) + <strong>1 Gaseosa</strong> a elección.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio Combo:</span>
+                            <span class="item-price">$7.000</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo Full Gaseosa 2 -->
+                <div class="card promo-card" data-nombre="Promo 2 Full Gaseosa (4 Empanadas + 2 Sándwiches + Gaseosa)" data-precio="12000">
+                    <div class="card-body">
+                        <span class="tag tag-promo">Combo Dúo con Bebida</span>
+                        <h3>Promo 2 + Gaseosa chica 500 ml</h3>
+                        <p><strong>Promo 2</strong> (4 Empanadas + 2 Sándwiches) + <strong>1 Gaseosa</strong> a elección.</p>
+                        <div class="price-tag">
+                            <span class="price-label">Precio Combo:</span>
+                            <span class="item-price">$12.000</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="btn-qty minus">-</button>
+                            <span class="qty-count">0</span>
+                            <button class="btn-qty plus">+</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,31 +214,28 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container footer-content">
-            <p><strong>Punto Repulgue</strong> - Empanadas Artesanales &copy; 2026. San Juan, Argentina.</p>
-            <p class="delivery-info"><i class="fa-solid fa-location-dot"></i> San Juan - Capital | Envíos a domicilio</p>
-            <p class="dev-credits">Desarrollado por <strong>Kratos</strong></p>
+        <div class="container">
+            <p>&copy; 2026 Punto Repulgue. Todos los derechos reservados.</p>
+            <p class="delivery-info">📍 San Juan Capital, San Juan, Argentina</p>
         </div>
     </footer>
 
-    <!-- Barra Flotante de Resumen Dinámico -->
-    <div id="order-bar" class="order-bar hidden">
+    <!-- Barra Flotante de Resumen con Total acumulado -->
+    <div class="order-bar hidden" id="order-bar">
         <div class="order-info">
-            <span id="order-summary-text">0 empanadas seleccionadas</span>
-            <small id="order-promo-tag" class="promo-badge"></small>
+            <span id="order-summary-text">0 ítems seleccionados</span>
+            <span class="promo-badge" id="order-total-price">Total: $0</span>
         </div>
-        <button id="send-order-btn" class="btn-primary btn-order-action">
-            <i class="fa-brands fa-whatsapp"></i> Enviar Pedido
-        </button>
+        <button class="btn-primary btn-order-action" id="send-order-btn">Confirmar Pedido 🛒</button>
     </div>
 
-    <!-- Modal para Datos de Entrega -->
-    <div id="checkout-modal" class="modal-overlay hidden">
+    <!-- Modal Formulario de Entrega -->
+    <div class="modal-overlay hidden" id="checkout-modal">
         <div class="modal-content">
             <button class="modal-close" id="close-modal">&times;</button>
             <h3>Datos para la Entrega</h3>
-            <p class="modal-sub">Completá tus datos para enviar el pedido por WhatsApp</p>
-            
+            <p class="modal-sub">Completá tus datos para enviar tu pedido por WhatsApp</p>
+
             <form id="checkout-form">
                 <div class="form-group">
                     <label for="cliente-nombre">Nombre y Apellido *</label>
@@ -166,52 +243,54 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="cliente-direccion">Dirección de Entrega *</label>
-                    <input type="text" id="cliente-direccion" placeholder="Ej: Av. Libertador 1234 (Este), Dpto 2" required>
+                    <label for="cliente-direccion">Dirección / Barrio *</label>
+                    <input type="text" id="cliente-direccion" placeholder="Ej: Av. Ignacio de la Roza 450" required>
                 </div>
 
                 <div class="form-group">
                     <label for="cliente-pago">Forma de Pago *</label>
                     <select id="cliente-pago" required>
                         <option value="Efectivo">Efectivo</option>
-                        <option value="Transferencia / MP">Transferencia / Mercado Pago</option>
+                        <option value="Transferencia / Mercado Pago">Transferencia / Mercado Pago</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="gaseosa-option-group" style="display: none;">
+                    <label for="cliente-gaseosa">Elección de Gaseosa (Promos con Bebida) *</label>
+                    <select id="cliente-gaseosa">
+                        <option value="Coca-Cola Original">Coca-Cola Original</option>
+                        <option value="Coca-Cola Sin Azúcar">Coca-Cola Sin Azúcar</option>
+                        <option value="Sprite">Sprite</option>
+                        <option value="Paso de los Toros Pomelo">Paso de los Toros Pomelo</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="cliente-notas">Notas o aclaraciones (opcional)</label>
-                    <textarea id="cliente-notas" placeholder="Ej: Timbre Roto / Traer vuelto de $10.000" rows="2"></textarea>
+                    <label for="cliente-notas">Aclaraciones o Notas (Opcional)</label>
+                    <textarea id="cliente-notas" rows="3" placeholder="Ej: Sabores elegidos en los combos, con/sin mayonesa, etc."></textarea>
                 </div>
 
-                <button type="submit" class="btn-primary btn-block btn-lg">
-                    <i class="fa-brands fa-whatsapp"></i> Confirmar y Abrir WhatsApp
-                </button>
+                <button type="submit" class="btn-primary btn-block">Enviar Pedido por WhatsApp 🚀</button>
             </form>
         </div>
     </div>
 
-    <!-- Modal de Confirmación y Éxito -->
-    <div id="success-modal" class="modal-overlay hidden">
+    <!-- Modal Éxito -->
+    <div class="modal-overlay hidden" id="success-modal">
         <div class="modal-content text-center">
-            <div class="success-icon">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h3>¡Pedido Enviado!</h3>
-            <p class="modal-sub">
-                Te hemos redirigido a WhatsApp para enviar el detalle de tu compra.<br><br>
-                <strong>Nuestro bot te responderá en instantes por WhatsApp confirmando la recepción y la demora estimada de entrega.</strong>
-            </p>
-            <button id="close-success-modal" class="btn-primary btn-block btn-lg" style="margin-top: 15px;">
-                Entendido / Hacer otro pedido
-            </button>
+            <div class="success-icon">🎉</div>
+            <h3>¡Pedido Preparado!</h3>
+            <p class="modal-sub">Te estamos redirigiendo a WhatsApp para confirmarlo con nuestro equipo.</p>
+            <button class="btn-primary btn-block" id="close-success-modal">Entendido</button>
         </div>
     </div>
 
-    <!-- Botón Flotante Estándar de WhatsApp -->
-    <a href="https://wa.me/5492644172479?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20empanadas." class="whatsapp-float" id="main-whatsapp-float" target="_blank" title="Pedir por WhatsApp">
-        <i class="fa-brands fa-whatsapp my-float"></i>
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/5492644172479" class="whatsapp-float" id="main-whatsapp-float" target="_blank">
+        💬
     </a>
 
+    <!-- JS -->
     <script src="script.js"></script>
 </body>
 </html>

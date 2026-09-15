@@ -172,6 +172,10 @@ body {
     background-color: var(--white);
 }
 
+.promo-menu-section {
+    background-color: var(--bg-light);
+}
+
 .section-title {
     text-align: center;
     font-size: 1.9rem;
@@ -202,6 +206,11 @@ body {
     justify-content: space-between;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.promo-card {
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
 }
 
 .card:hover {
@@ -235,6 +244,14 @@ body {
     text-transform: uppercase;
 }
 
+.tag-sandwich {
+    background-color: #2563eb;
+}
+
+.tag-promo {
+    background-color: #16a34a;
+}
+
 .card h3 {
     color: var(--primary-color);
     font-size: 1.25rem;
@@ -245,8 +262,33 @@ body {
 .card p {
     font-size: 0.9rem;
     color: #555;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     flex-grow: 1;
+}
+
+/* Etiqueta de Precio Elegante */
+.price-tag {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    background-color: rgba(29, 77, 56, 0.08);
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    width: fit-content;
+}
+
+.price-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.item-price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-color);
 }
 
 /* Controles de Cantidad */
@@ -300,39 +342,6 @@ body {
     display: inline-block;
 }
 
-/* Promo */
-.promo-section {
-    padding: 40px 0;
-}
-
-.promo-container {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(29, 77, 56, 0.25);
-}
-
-.promo-img {
-    width: 35%;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-.promo-text h2 {
-    font-size: 1.8rem;
-    margin-bottom: 12px;
-    line-height: 1.3;
-}
-
-.promo-text p {
-    margin-bottom: 20px;
-    opacity: 0.9;
-}
-
 /* Footer */
 footer {
     background-color: #111;
@@ -346,12 +355,6 @@ footer {
     margin-top: 6px;
     color: var(--accent-color);
     font-weight: 600;
-}
-
-.dev-credits {
-    margin-top: 8px;
-    font-size: 0.85rem;
-    color: #888;
 }
 
 /* Barra Flotante de Resumen */
@@ -389,7 +392,7 @@ footer {
 .promo-badge {
     color: #4ade80;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
 }
 
 .btn-order-action {
@@ -555,10 +558,6 @@ footer {
         font-size: 1.8rem;
     }
 
-    .hero-text p {
-        font-size: 0.98rem;
-    }
-
     .hero-image {
         order: -1;
     }
@@ -571,25 +570,6 @@ footer {
     .menu-grid {
         grid-template-columns: 1fr;
         gap: 16px;
-    }
-
-    .card-img {
-        height: 160px;
-    }
-
-    .promo-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 24px 18px;
-    }
-
-    .promo-img {
-        width: 100%;
-        max-height: 200px;
-    }
-
-    .promo-text h2 {
-        font-size: 1.5rem;
     }
 
     .order-bar {

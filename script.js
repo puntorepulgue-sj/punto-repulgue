@@ -1,102 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Referencias a elementos del DOM
     const cards = document.querySelectorAll('.card');
     const orderBar = document.getElementById('order-bar');
     const orderSummaryText = document.getElementById('order-summary-text');
-    const orderPromoTag = document.getElementById('order-promo-tag');
+    const orderTotalPrice = document.getElementById('order-total-price');
     const sendOrderBtn = document.getElementById('send-order-btn');
     const whatsappFloat = document.getElementById('main-whatsapp-float');
 
-    // Modales
     const checkoutModal = document.getElementById('checkout-modal');
     const closeModalBtn = document.getElementById('close-modal');
     const checkoutForm = document.getElementById('checkout-form');
+    const gaseosaGroup = document.getElementById('gaseosa-option-group');
     
     const successModal = document.getElementById('success-modal');
     const closeSuccessModalBtn = document.getElementById('close-success-modal');
 
-    // Objeto para llevar el estado del carrito: { "Carne Tradicional": 3, "Humita": 2 }
+    // Estructura: { nombre: { cantidad: Number, precioUnitario: Number } }
     const cart = {};
-
-    // Número de teléfono de destino (formato internacional sin +)
     const WHATSAPP_PHONE = "5492644172479";
 
-    // Manejo de clicks en botones + y - de los productos
     cards.forEach(card => {
         const nombre = card.getAttribute('data-nombre');
+        const precioUnitario = parseFloat(card.getAttribute('data-precio')) || 0;
         const btnMinus = card.querySelector('.minus');
         const btnPlus = card.querySelector('.plus');
         const qtyCount = card.querySelector('.qty-count');
 
         btnPlus.addEventListener('click', () => {
-            const currentQty = (cart[nombre] || 0) + 1;
-            cart[nombre] = currentQty;
+            const currentQty = (cart[nombre] ? cart[nombre].cantidad : 0) + 1;
+
+            cart[nombre] = {
+                cantidad: currentQty,
+                precioUnitario: precioUnitario
+            };
+
             qtyCount.textContent = currentQty;
             updateOrderBar();
         });
 
         btnMinus.addEventListener('click', () => {
-            if (cart[nombre] && cart[nombre] > 0) {
-                cart[nombre] -= 1;
-                if (cart[nombre] === 0) {
+            if (cart[nombre] && cart[nombre].cantidad > 0) {
+                cart[nombre].cantidad -= 1;
+                
+                if (cart[nombre].cantidad === 0) {
                     delete cart[nombre];
                 }
-                qtyCount.textContent = cart[nombre] || 0;
+                
+                qtyCount.textContent = cart[nombre] ? cart[nombre].cantidad : 0;
                 updateOrderBar();
             }
         });
     });
 
-    // Actualizar resumen y visibilidad de la barra flotante
+    // Recalcular la barra inferior de total
     function updateOrderBar() {
-        const totalEmpanadas = Object.values(cart).reduce((a, b) => a + b, 0);
+        let totalItems = 0;
+        let grandTotal = 0;
 
-        if (totalEmpanadas > 0) {
+        for (const item in cart) {
+            totalItems += cart[item].cantidad;
+            grandTotal += cart[item].cantidad * cart[item].precioUnitario;
+        }
+
+        if (totalItems > 0) {
             orderBar.classList.remove('hidden');
-            
-            // Subir el botón flotante de WhatsApp para que no se superponga con la barra
-            if (whatsappFloat) {
-                whatsappFloat.style.bottom = "85px";
-            }
+            if (whatsappFloat) whatsappFloat.style.bottom = "85px";
 
-            // Texto de cantidad
-            const textoEmpanadas = totalEmpanadas === 1 ? '1 empanada seleccionada' : `${totalEmpanadas} empanadas seleccionadas`;
-            orderSummaryText.textContent = textoEmpanadas;
+            orderSummaryText.textContent = totalItems === 1 ? '1 producto seleccionado' : `${totalItems} productos seleccionados`;
+            orderTotalPrice.textContent = `Total: $${grandTotal.toLocaleString('es-AR')}`;
 
-            // Indicador visual de docenas / promociones
-            const docenas = Math.floor(totalEmpanadas / 12);
-            const sobrantes = totalEmpanadas % 12;
-
-            if (docenas > 0) {
-                if (sobrantes === 0) {
-                    orderPromoTag.textContent = `🎉 ¡Completaste ${docenas} ${docenas === 1 ? 'docena' : 'docenas'}!`;
-                } else {
-                    const faltantes = 12 - sobrantes;
-                    orderPromoTag.textContent = `💡 Llevás ${docenas} ${docenas === 1 ? 'docena' : 'docenas'}. ¡Sumá ${faltantes} más para otra docena!`;
-                }
-            } else {
-                const faltantes = 12 - totalEmpanadas;
-                orderPromoTag.textContent = `💡 ¡Sumá ${faltantes} más para completar tu 1ª docena!`;
+            // Mostrar selección de gaseosa si hay combo con bebida
+            const tieneGaseosaCombo = Object.keys(cart).some(item => item.includes('Gaseosa'));
+            if (gaseosaGroup) {
+                gaseosaGroup.style.display = tieneGaseosaCombo ? 'block' : 'none';
             }
         } else {
             orderBar.classList.add('hidden');
-            if (whatsappFloat) {
-                whatsappFloat.style.bottom = "25px";
-            }
+            if (whatsappFloat) whatsappFloat.style.bottom = "25px";
         }
     }
 
-    // Abrir Modal de Datos de Entrega
     sendOrderBtn.addEventListener('click', () => {
         checkoutModal.classList.remove('hidden');
     });
 
-    // Cerrar Modal Checkout
     closeModalBtn.addEventListener('click', () => {
         checkoutModal.classList.add('hidden');
     });
 
-    // Formulario de Checkout: Generar mensaje e iniciar flujo por WhatsApp
+    // Enviar pedido a WhatsApp
     checkoutForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -104,17 +95,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const direccion = document.getElementById('cliente-direccion').value.trim();
         const pago = document.getElementById('cliente-pago').value;
         const notas = document.getElementById('cliente-notas').value.trim();
+        const tieneGaseosaCombo = Object.keys(cart).some(item => item.includes('Gaseosa'));
+        const gaseosaElegida = tieneGaseosaCombo ? document.getElementById('cliente-gaseosa').value : null;
 
-        // Construcción del mensaje para el Bot de WhatsApp
-        let mensaje = `*¡Hola Punto Repulgue! Quiero realizar un pedido:* 🥟\n\n`;
-        mensaje += `*Detalle de Empanadas:*\n`;
+        let totalFinal = 0;
+        let mensaje = `*¡Hola Punto Repulgue! Quiero hacer un pedido:* 🥟🥪\n\n`;
+        mensaje += `*Detalle del Pedido:*\n`;
 
-        for (const [sabor, cantidad] of Object.entries(cart)) {
-            mensaje += `• ${cantidad}x ${sabor}\n`;
+        for (const [item, data] of Object.entries(cart)) {
+            const subtotal = data.cantidad * data.precioUnitario;
+            totalFinal += subtotal;
+            mensaje += `• ${data.cantidad}x ${item} ($${data.precioUnitario.toLocaleString('es-AR')} c/u) = *$${subtotal.toLocaleString('es-AR')}*\n`;
         }
 
-        const totalUnidades = Object.values(cart).reduce((a, b) => a + b, 0);
-        mensaje += `\n*Total de unidades:* ${totalUnidades}\n`;
+        mensaje += `\n💰 *TOTAL DEL PEDIDO: $${totalFinal.toLocaleString('es-AR')}*\n`;
+
+        if (gaseosaElegida) {
+            mensaje += `🥤 *Gaseosa elegida:* ${gaseosaElegida}\n`;
+        }
 
         mensaje += `\n*Datos para la entrega:*\n`;
         mensaje += `👤 *Nombre:* ${nombre}\n`;
@@ -122,30 +120,24 @@ document.addEventListener('DOMContentLoaded', () => {
         mensaje += `💳 *Forma de pago:* ${pago}\n`;
 
         if (notas) {
-            mensaje += `📝 *Notas:* ${notas}\n`;
+            mensaje += `📝 *Aclaraciones:* ${notas}\n`;
         }
 
-        // Codificar mensaje para la URL
         const encodedMessage = encodeURIComponent(mensaje);
         const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
 
-        // Abrir WhatsApp en pestaña nueva
         window.open(whatsappUrl, '_blank');
 
-        // Cerrar modal checkout y abrir modal de éxito
         checkoutModal.classList.add('hidden');
         successModal.classList.remove('hidden');
 
-        // Resetear carrito y formulario
         resetCart();
     });
 
-    // Cerrar Modal de Éxito
     closeSuccessModalBtn.addEventListener('click', () => {
         successModal.classList.add('hidden');
     });
 
-    // Resetear todo el estado
     function resetCart() {
         for (const key in cart) {
             delete cart[key];
