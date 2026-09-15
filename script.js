@@ -196,25 +196,18 @@ document.addEventListener('DOMContentLoaded', () => {
         mensaje += `Envío: $${costoEnvio.toLocaleString('es-AR')}\n`;
         mensaje += `*TOTAL FINAL: $${totalFinal.toLocaleString('es-AR')}*\n`;
 
-        const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+        // URL directa a API de WhatsApp (Compatible con Web y Móvil)
+        const urlWhatsApp = `https://api.whatsapp.com/send?phone=${TELEFONO_WHATSAPP}&text=${encodeURIComponent(mensaje)}`;
 
-        // Ocultar modal checkout
+        // Cerrar modal de checkout
         checkoutModal.classList.add('hidden');
 
-        // Detectar si es dispositivo móvil para elegir el método de redirección adecuado
-        const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Redirección inmediata directa a la app de WhatsApp
+        window.location.href = urlWhatsApp;
 
-        if (esMovil) {
-            // En celular vaciamos y redirigimos inmediatamente (evita bloqueo de emergentes)
+        // Limpiar el estado del carrito para cuando el cliente vuelva a la web
+        setTimeout(() => {
             vaciarCarrito();
-            window.location.href = url;
-        } else {
-            // En PC mostramos el modal de éxito y abrimos en una nueva pestaña
-            successModal.classList.remove('hidden');
-            setTimeout(() => {
-                window.open(url, '_blank');
-                vaciarCarrito();
-            }, 800);
-        }
+        }, 500);
     });
 });
